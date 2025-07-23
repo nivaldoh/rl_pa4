@@ -10,6 +10,10 @@ class Policy_DeterministicGreedy(Policy):
         """
         self.Q = Q
 
+    def update_Q(self, Q: np.ndarray[np.float64]):
+        """Updates the Q-values that this policy uses for action selection."""
+        self.Q = Q
+
     @override
     def action(self, state: int) -> int:
         """
@@ -47,7 +51,7 @@ class Policy_DeterministicGreedy(Policy):
         # raise NotImplementedError
 
         available_action_values = self.Q[state]
-        greedy_action = np.max(available_action_values)
+        greedy_action = np.argmax(available_action_values)
         if action == greedy_action:
             return 1
         return 0
